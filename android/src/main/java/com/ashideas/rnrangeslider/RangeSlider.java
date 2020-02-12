@@ -30,8 +30,8 @@ public class RangeSlider extends View {
         CENTER
     }
 
-    private static final float SQRT_3 = (float) Math.sqrt(3);
-    private static final float SQRT_3_2 = SQRT_3 / 2;
+    private static final float SQRT_3 = (float) Math.sqrt(100);
+    private static final float SQRT_3_2 = SQRT_3 ;
 
     private static final int THUMB_LOW = 0;
     private static final int THUMB_HIGH = 1;
@@ -514,9 +514,10 @@ public class RangeSlider extends View {
 
     private void preparePath(float x, float y, float left, float top, float right, float bottom, float tailHeight) {
         float cx = x;
+        float ny = y;
         labelPath.reset();
+        x = cx + 5;
         labelPath.moveTo(x, y);
-        x = cx + tailHeight / SQRT_3;
         y = bottom;
         labelPath.lineTo(x, y);
         x = right;
@@ -527,7 +528,9 @@ public class RangeSlider extends View {
         labelPath.lineTo(x, y);
         y = bottom;
         labelPath.lineTo(x, y);
-        x = cx - tailHeight / SQRT_3;
+        x = cx - 5;
+        labelPath.lineTo(x, y);
+        y = ny;
         labelPath.lineTo(x, y);
         labelPath.close();
     }
