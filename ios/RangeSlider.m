@@ -1,3 +1,4 @@
+
 //
 // Created by Tigran Sahakyan on 2019-01-14.
 // Copyright (c) 2019 tigrans. All rights reserved.
@@ -13,8 +14,8 @@
 #define TOP @"top"
 #define BOTTOM @"bottom"
 #define CENTER @"center"
-#define SQRT_3 (float) sqrt(3)
-#define SQRT_3_2 SQRT_3 / 2
+#define SQRT_3 (float) sqrt(100)
+#define SQRT_3_2 SQRT_3
 #define CLAMP(x, min, max) (x < min ? min : x > max ? max : x)
 
 const int THUMB_LOW = 0;
@@ -497,9 +498,9 @@ NSDateFormatter *dateTimeFormatter;
 
 - (void)preparePath:(CGContextRef)context x:(CGFloat)x y:(CGFloat)y left:(CGFloat)left top:(CGFloat)top right:(CGFloat)right bottom:(CGFloat)bottom tailHeight:(CGFloat)tailHeight {
     CGFloat cx = x;
+    CGFloat ny = y;
+    x = cx + tailHeight / SQRT_3_2 ;
     CGContextMoveToPoint(context, x, y);
-
-    x = cx + tailHeight / SQRT_3;
     y = bottom;
     CGContextAddLineToPoint(context, x, y);
     x = right;
@@ -510,7 +511,9 @@ NSDateFormatter *dateTimeFormatter;
     CGContextAddLineToPoint(context, x, y);
     y = bottom;
     CGContextAddLineToPoint(context, x, y);
-    x = cx - tailHeight / SQRT_3;
+    x = cx - tailHeight / SQRT_3_2  ;
+    CGContextAddLineToPoint(context, x, y);
+    y = ny;
     CGContextAddLineToPoint(context, x, y);
     CGContextClosePath(context);
 }
